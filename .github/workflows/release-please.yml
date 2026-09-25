@@ -1,0 +1,48 @@
+name: release-please
+
+# Keeps a release PR open on main that bumps VERSION, plugin.json and CHANGELOG.md from the
+# conventional commits since the last tag. Merging it tags vX.Y.Z and creates the GitHub release;
+# this workflow then builds, tests and publishes the versioned images (tags created with
+# GITHUB_TOKEN don't trigger other workflows, so the image workflow is called directly).
+#
+# Optional secret RELEASE_PLEASE_TOKEN (fine-grained PAT: contents + pull requests read/write) makes
+# CI run on the release PR itself; without it a maintainer merges the release PR via ruleset bypass.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: release-please
+  cancel-in-progress: false
+
+jobs:
+  release-please:
+    runs-on: ubuntu-24.04
+    outputs:
+      release_created: ${{ steps.rp.outputs.release_created }}
+      tag_name: ${{ steps.rp.outputs.tag_name }}
+    steps:
+      - id: rp
+        uses: googleapis/release-please-action@v5
+        with:
+          token: ${{ secrets.RELEASE_PLEASE_TOKEN || github.token }}
+          config-file: release-please-config.json
+          manifest-file: .release-please-manifest.json
+
+  images:
+    needs: release-please
+    if: needs.release-please.outputs.release_created == 'true'
+    uses: ./.github/workflows/image.yml
+    with:
+      tag: ${{ needs.release-please.outputs.tag_name }}
+    permissions:
+      contents: write
+      packages: write
+      id-token: write
+      attestations: write

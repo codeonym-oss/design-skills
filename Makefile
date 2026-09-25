@@ -14,7 +14,7 @@ help:
 	@echo "make test-core    integration tests in the core image"
 	@echo "make test-full    integration tests in the full image (everything)"
 	@echo "make test-bash32  unit tests under bash 3.2 (macOS compatibility of the host-side code)"
-	@echo "make lint         shellcheck every script"
+	@echo "make lint         shellcheck every script, actionlint the workflows"
 
 build: build-core build-full
 
@@ -42,3 +42,4 @@ test-bash32:
 lint:
 	$(DOCKER) run --rm -v $(CURDIR):/repo:ro -w /repo koalaman/shellcheck:stable -x -S warning \
 	  bin/ds lib/*.sh skills/*/scripts/*.sh
+	$(DOCKER) run --rm -v $(CURDIR):/repo:ro -w /repo rhysd/actionlint:latest -color

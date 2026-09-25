@@ -1,0 +1,41 @@
+name: Bug report
+description: A skill script, the ds CLI or an image misbehaves.
+labels: [bug]
+body:
+  - type: input
+    id: what
+    attributes:
+      label: What happened?
+      placeholder: "ds graphic-design/optimize logo.png fails with …"
+    validations: { required: true }
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      description: The exact command(s), and a small input file if you can share one.
+      render: shell
+    validations: { required: true }
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect?
+    validations: { required: true }
+  - type: textarea
+    id: doctor
+    attributes:
+      label: "`ds doctor` and `ds version` output"
+      description: Run both and paste the output (it shows the runtime and which images you have).
+      render: text
+    validations: { required: true }
+  - type: dropdown
+    id: os
+    attributes:
+      label: Host OS
+      options: [Linux, macOS (Apple Silicon), macOS (Intel), Windows (WSL2), Other]
+    validations: { required: true }
+  - type: dropdown
+    id: runtime
+    attributes:
+      label: Runtime
+      options: [Docker, Podman, Native (DS_RUNTIME=native)]
+    validations: { required: true }
