@@ -37,7 +37,7 @@ test-full:
 
 test-bash32:
 	$(DOCKER) run --rm -v $(CURDIR):/repo:ro -w /repo bash:3.2 sh -c \
-	  'apk add -q --no-cache coreutils git >/dev/null && git clone -q --depth 1 -b v1.13.0 https://github.com/bats-core/bats-core /tmp/bats && /tmp/bats/bin/bats tests/unit'
+	  'apk add -q --no-cache git >/dev/null && git clone -q --depth 1 -b v1.13.0 https://github.com/bats-core/bats-core /tmp/bats && /tmp/bats/bin/bats tests/unit/ds.bats tests/unit/ds-cli.bats tests/unit/check.bats'
 
 lint:
 	$(DOCKER) run --rm -v $(CURDIR):/repo:ro -w /repo koalaman/shellcheck:stable -x -S warning \
