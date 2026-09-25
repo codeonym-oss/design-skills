@@ -1,6 +1,6 @@
 {
   "name": "codeonym-oss",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Design skills for Claude Code with a reproducible, headless toolchain: graphic design, illustration, photo editing, UI design, typography, print layout, 3D with Blender, video editing and screen recording. Every script runs in a versioned container (Blender, GIMP, Inkscape, Krita, Scribus, darktable, ffmpeg, ImageMagick, fonts…) so it works the same on Linux, macOS and Windows (WSL2).",
   "author": {
     "name": "codeonym",

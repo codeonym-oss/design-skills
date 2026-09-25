@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.1.2](https://github.com/codeonym-oss/design-skills/compare/v0.1.1...v0.1.2) (2026-09-25)
+
+
+### Documentation
+
+* link the repo's own design-skills board ([#25](https://github.com/codeonym-oss/design-skills/issues/25)) ([d8a410b](https://github.com/codeonym-oss/design-skills/commit/d8a410ba046a2c3176a2aca5ccd0a64d44891cf9))
+* track issues in GitHub Issues instead of Linear ([#23](https://github.com/codeonym-oss/design-skills/issues/23)) ([a702986](https://github.com/codeonym-oss/design-skills/commit/a70298696ab705adc931219836b376ba5a10242f))
+
 ## [0.1.1](https://github.com/codeonym-oss/design-skills/compare/v0.1.0...v0.1.1) (2026-09-25)
 
 
