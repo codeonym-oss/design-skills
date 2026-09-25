@@ -79,3 +79,14 @@ EOF
   [ "$status" -eq 0 ]
   [ "$(dims stills/s_0001.png)" = 128x72 ]
 }
+
+@test "render.sh: settings are validated, never injected into Python" {
+  cube_obj
+  bash "$SK/3d-modeling/scripts/blender.sh" -b --factory-startup -P "$SK/3d-modeling/scripts/turntable.py" -- \
+      --model cube.obj --frames 2 --save v.blend >/dev/null 2>&1
+  run ds 3d-modeling/render v.blend --samples "1'); import os; os.system('touch pwned'); ('"
+  [ "$status" -eq 2 ]
+  run ds 3d-modeling/render v.blend --engine luxcore
+  [ "$status" -eq 2 ]
+  [ ! -e pwned ]
+}

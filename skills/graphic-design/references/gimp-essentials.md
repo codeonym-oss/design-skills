@@ -11,7 +11,7 @@ GIMP 3 has **non-destructive filters**: filters applied from the *Filters* menu 
 | Task | Tool / shortcut |
 |---|---|
 | Cut out a subject | *Foreground Select* (in Free Select group), or *Paths* (B) for hard edges |
-| Remove an object | Select it loosely → *Filters → Enhance → Heal selection* (Resynthesizer) |
+| Remove an object | Select it loosely → *Filters → Enhance → Heal selection* (Resynthesizer plugin — install it in your desktop GIMP; not in the image) · or the built-in *Heal* tool |
 | Spot fix | Heal tool (H), Clone (C) |
 | Color correct | *Colors → Curves*, *Colors → Levels*, *Colors → Hue-Saturation* |
 | Sharpen for web | *Filters → Enhance → Sharpen (Unsharp Mask)*, radius 0.5–1, amount 0.5 |

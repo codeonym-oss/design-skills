@@ -15,6 +15,7 @@ oxipng	-	oxipng	oxipng	oxipng
 optipng	optipng	optipng	optipng	optipng
 jpegoptim	jpegoptim	jpegoptim	jpegoptim	jpegoptim
 gimp	gimp	gimp	gimp	cask:gimp
+gimp-console	gimp	gimp	gimp	cask:gimp
 gmic	gmic	gmic	gmic	gmic
 krita	krita	krita	krita	cask:krita
 blender	blender	blender	blender	cask:blender

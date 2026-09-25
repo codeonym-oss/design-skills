@@ -53,3 +53,10 @@ load helpers
   [ "$status" -eq 0 ]
   grep -q '<path' sketch.traced.svg
 }
+
+@test "optimize: a.png and a.jpg side by side keep separate WebP/AVIF" {
+  magick -size 200x100 xc:red a.png; magick -size 200x100 xc:blue a.jpg
+  run ds graphic-design/optimize a.png a.jpg
+  [ "$status" -eq 0 ]
+  [ -s a.png.webp ] && [ -s a.jpg.webp ] && [ -s a.png.avif ] && [ -s a.jpg.avif ]
+}

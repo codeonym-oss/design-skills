@@ -111,7 +111,7 @@ ds_container_exec() {
   # Hardware video encoding (VAAPI) when the host has a GPU render node.
   if [[ ${DS_GPU:-1} != 0 && -e /dev/dri/renderD128 ]]; then
     args+=(--device /dev/dri)
-    p=$(stat -c %g /dev/dri/renderD128 2>/dev/null) && args+=(--group-add "$p")
+    p=$(stat -c %g /dev/dri/renderD128 2>/dev/null || stat -f %g /dev/dri/renderD128 2>/dev/null) && args+=(--group-add "$p")
   fi
 
   local v

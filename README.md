@@ -59,6 +59,13 @@ docker run --rm --user $UID:$GID \
   apt, pacman, dnf or Homebrew.
 - Fonts in `./fonts` are available to every tool in the container.
 
+### Desktop apps vs. the container
+
+Everything scriptable runs headlessly in the image. Interactive desktop apps stay on your machine, and the skills
+explain them per OS: OBS and its plugins, keystroke overlays and auto-zoom recorders (`screen-recording`), Penpot,
+Figma and Lunacy (`ui-design`), color pickers, AI upscalers (Upscayl), GIMP plugins like Resynthesizer, the Kdenlive
+editor (projects are rendered headlessly with melt), and tablet drivers.
+
 ### Images
 
 | Tag | |
@@ -67,7 +74,8 @@ docker run --rm --user $UID:$GID \
 | `:0.1-core`, `:core`, `:0.1-full`, `:full`, `:latest` | moving tags |
 | `:edge-core`, `:edge-full` | latest `main` |
 
-Built on Ubuntu 26.04 LTS (base pinned by digest), for `linux/amd64` and `linux/arm64`.
+Built on Ubuntu 26.04 LTS (base pinned by digest), for `linux/amd64` and `linux/arm64`. Publishing from a fork?
+GHCR creates new packages as private — set the package to *Public* once (package settings) so `docker pull` works anonymously.
 
 ### Without Claude
 

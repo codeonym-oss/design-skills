@@ -6,7 +6,10 @@ set -euo pipefail
 . "$(dirname "$(readlink -f "$0")")/../../../lib/env.sh"
 out=webfonts; files=()
 for a in "$@"; do
-  if [[ -f $a ]]; then files+=("$a"); else out=$a; fi
+  case ${a,,} in
+    *.ttf|*.otf) [[ -f $a ]] || { echo "font not found: $a" >&2; exit 2; }; files+=("$a") ;;
+    *) out=$a ;;
+  esac
 done
 ((${#files[@]})) || { echo "usage: $0 <fonts.ttf|otf...> [outdir]" >&2; exit 2; }
 mkdir -p "$out"

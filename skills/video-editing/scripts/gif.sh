@@ -7,7 +7,7 @@ in=${1:-}; [[ -f $in ]] || { sed -n '2,3p' "$0"; exit 2; }
 shift
 start=0; dur=; width=800; fps=15
 while (($#)); do
-  case $1 in --start) start=$2; shift ;; --dur) dur=$2; shift ;; --width) width=$2; shift ;; --fps) fps=$2; shift ;; esac
+  case $1 in --start) start=$2; shift ;; --dur) dur=$2; shift ;; --width) width=$2; shift ;; --fps) fps=$2; shift ;; *) echo "unknown option $1" >&2; exit 2 ;; esac
   shift
 done
 stem=${in%.*}

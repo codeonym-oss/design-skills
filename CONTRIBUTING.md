@@ -26,7 +26,9 @@ needed when the **Dockerfile** changes.
    . "$(dirname "$(readlink -f "$0")")/../../../lib/env.sh"
    ```
    Desktop-only scripts (they must see the user's session) use `# ds-runtime: host` instead.
-2. Write outputs next to the inputs (`export/`, `web/`, `renders/`), never overwrite inputs, print `✔ <output>` lines.
+2. Write outputs next to the input (`export/`, `web/`) or, for many-input results (sheets, specimens, icon sets), in the
+   working folder with an overridable name. Never overwrite inputs — scripts whose job is in-place editing
+   (`strip-metadata.sh`) keep a backup by default. Print `✔ <output>` lines. Reject unknown options.
 3. Add a test in `tests/integration/<skill>.bats` with a generated fixture (see `helpers.bash`); tag it
    `# bats test_tags=full` if it needs the full image.
 4. Document it in the skill's `SKILL.md` table — `tests/unit/repo.bats` fails on undocumented or missing scripts.
@@ -48,7 +50,8 @@ needed when the **Dockerfile** changes.
 
 `bin/ds`, `lib/ds.sh` and `lib/env.sh` run on the user's machine before the container starts: keep them bash 3.2
 compatible (no `${x,,}`, `declare -A`, `mapfile`; expand possibly-empty arrays as `${a[@]+"${a[@]}"}`) and avoid
-GNU-only flags. `make test-bash32` checks this.
+GNU-only flags (`readlink -f` is fine: macOS 12.3+). `make test-bash32` checks the bash syntax on BusyBox tools.
+Forwarded environment variables a script reads must be listed in `DS_PASS_ENV` (`lib/ds.sh`).
 
 ## Releasing
 

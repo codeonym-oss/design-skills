@@ -2,7 +2,7 @@
 
 ## Remove an object / person / power line
 1. *Free Select* (F) loosely around the object, with ~10 px margin.
-2. *Filters → Enhance → Heal selection* (Resynthesizer). Context sampling width 50, *Random* order.
+2. *Filters → Enhance → Heal selection* (Resynthesizer plugin, desktop GIMP; without it use the *Heal* tool). Context sampling width 50, *Random* order.
 3. Fix leftovers with the Heal tool (H): Ctrl+click a clean source, paint over.
 
 ## Headshot cleanup (natural)

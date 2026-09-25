@@ -3,9 +3,9 @@
 # design-skills sandbox: a headless, reproducible design toolchain.
 #
 #   core  CLI toolkit — ImageMagick 7, Inkscape 1.4, ffmpeg 8, Ghostscript, Poppler,
-#         potrace, web-image optimizers, exiftool, FontForge, curated fonts   (~1.3 GB)
+#         potrace, web-image optimizers, exiftool, FontForge, curated fonts   (~1.2 GB)
 #   full  core + Blender 5, GIMP 3.2, Krita 6, Scribus 1.6, darktable 5, MLT/melt,
-#         G'MIC, Mesa (software GL + VAAPI), Xvfb, CJK fonts                  (~4 GB)
+#         G'MIC, Mesa (software GL + VAAPI), Xvfb, CJK fonts                  (~2.9 GB)
 #
 # Build from the repo root:  docker build -f docker/Dockerfile --target core -t design-skills:dev-core .
 

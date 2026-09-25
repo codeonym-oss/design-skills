@@ -16,6 +16,7 @@ automatically (`bash <skill-dir>/scripts/<name>.sh …`, see `design-sandbox`).
 | **Figma** | When a client/team already uses Figma | https://figma.com |
 | **Lunacy** | Free offline desktop editor (Windows/macOS/Linux), opens `.fig` and `.sketch` | https://icons8.com/lunacy |
 | **Inkscape 1.4** | Custom icons and illustrations as SVG | container: `inkscape` |
+| **Color picker** | Pick colors anywhere on screen (HEX/RGB/OKLCH) | Eyedropper (Linux) · Digital Color Meter (macOS) · PowerToys Color Picker (Windows) |
 | **Fonts** | Inter, IBM Plex, Roboto, Source Sans 3, JetBrains Mono… | `typography` skill |
 
 An agent can also design directly in code: write the screen as HTML/Tailwind or SVG, render it, look at it, iterate.

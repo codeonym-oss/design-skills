@@ -16,7 +16,7 @@ First public release, copied from the author's personal Arch workstation skills 
 - **Distro-agnostic checks** with install hints for apt, pacman, dnf and Homebrew (`lib/packages.tsv`).
 - `print-layout/new-print-doc.sh --brand '#hex'`; Scribus runs under Xvfb when headless.
 - `photo-editing/batch-develop.sh` accepts a `.dtstyle` file path.
-- Test suite: 46 unit tests (bash 5 and 3.2) and 50 integration tests run inside the images; CI builds and tests
+- Test suite: 46 unit tests (bash 5 and 3.2) and 54 integration tests run inside the images; CI builds and tests
   every variant × architecture before publishing.
 
 ### Changed

@@ -76,7 +76,7 @@ echo
 printf '%sStorage%s\n' "$B" "$N"
 read -r avail pcent < <(df -h . | awk 'NR==2 {print $4, $5}')
 printf '  this folder: %s free (%s used)\n' "$avail" "$pcent"
-((${pcent%\%} >= 90)) && printf '  %s!%s disk nearly full — renders, recordings and the full image (≈4 GB) need room\n' "$Y" "$N"
+((${pcent%\%} >= 90)) && printf '  %s!%s disk nearly full — renders, recordings and the full image (≈3 GB) need room\n' "$Y" "$N"
 
 echo
 if ((failed)); then echo "Run with --verbose for install commands."; exit 1; fi

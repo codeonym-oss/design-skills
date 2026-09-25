@@ -26,8 +26,11 @@ for f in "$@"; do
       ;;
     *) echo "skip $f (only png/jpg)"; continue ;;
   esac
-  magick "$f" -quality "$q" "$stem.webp"
-  avifenc -q "$q" -s 6 "$f" "$stem.avif" >/dev/null
+  # a.png and a.jpg side by side would both claim a.webp: keep the source extension then.
+  web=$stem
+  for o in png jpg jpeg; do [[ $o != "$ext" && -f $stem.$o ]] && web="$stem.$ext"; done
+  magick "$f" -quality "$q" "$web.webp"
+  avifenc -q "$q" -s 6 "$f" "$web.avif" >/dev/null
   printf '✔ %s  %s → opt %s · webp %s · avif %s\n' "$f" "$(human "$before")" \
-    "$(human "$(size "$stem.opt.$ext")")" "$(human "$(size "$stem.webp")")" "$(human "$(size "$stem.avif")")"
+    "$(human "$(size "$stem.opt.$ext")")" "$(human "$(size "$web.webp")")" "$(human "$(size "$web.avif")")"
 done

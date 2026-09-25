@@ -49,3 +49,10 @@ load helpers
   run bash -c ". '$REPO/lib/env.sh'; fc-list"
   [[ "$output" != *"/fonts/Project.ttf"* ]]
 }
+
+@test "webfont: a mistyped font path is an error, not an output folder" {
+  run ds typography/webfont Missing-Font.ttf out
+  [ "$status" -eq 2 ]
+  [[ "$output" == *"font not found"* ]]
+  [ ! -d Missing-Font.ttf ]
+}

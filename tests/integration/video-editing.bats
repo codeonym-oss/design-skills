@@ -73,3 +73,9 @@ XML
   [ "$status" -eq 0 ]
   [ "$(codec_of out.mp4)" = h264 ]
 }
+
+@test "gif: unknown options are rejected" {
+  fixture_video in.mp4 1
+  run ds video-editing/gif in.mp4 --widht 300
+  [ "$status" -eq 2 ]
+}

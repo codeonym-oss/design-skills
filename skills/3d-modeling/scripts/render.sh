@@ -24,26 +24,31 @@ done
 mkdir -p "$out"
 name=$(basename "${blend%.blend}")
 
-py="import bpy
+case $engine in ''|eevee|cycles) ;; *) echo "--engine must be eevee or cycles" >&2; exit 2 ;; esac
+[[ -z $samples || $samples =~ ^[0-9]+$ ]] || { echo "--samples must be a number" >&2; exit 2; }
+[[ -z $res || $res =~ ^[0-9]+x[0-9]+$ ]] || { echo "--res must look like 1920x1080" >&2; exit 2; }
+export DS_R_ENGINE=$engine DS_R_SAMPLES=$samples DS_R_RES=$res
+# Settings reach Python through the environment — never pasted into the source.
+py='import bpy, os
 s = bpy.context.scene
-eng = '${engine}'
-if eng: s.render.engine = {'eevee': 'BLENDER_EEVEE', 'cycles': 'CYCLES'}[eng]
-if s.render.engine == 'CYCLES':
-    s.cycles.device = 'CPU'
+eng, samples, res = (os.environ.get(k, "") for k in ("DS_R_ENGINE", "DS_R_SAMPLES", "DS_R_RES"))
+if eng: s.render.engine = {"eevee": "BLENDER_EEVEE", "cycles": "CYCLES"}[eng]
+if s.render.engine == "CYCLES":
+    s.cycles.device = "CPU"
     s.cycles.use_denoising = True
-    if '${samples}': s.cycles.samples = int('${samples}')
-elif '${samples}':
-    s.eevee.taa_render_samples = int('${samples}')
-if '${res}':
-    w, h = '${res}'.split('x'); s.render.resolution_x, s.render.resolution_y = int(w), int(h)
+    if samples: s.cycles.samples = int(samples)
+elif samples:
+    s.eevee.taa_render_samples = int(samples)
+if res:
+    w, h = res.split("x"); s.render.resolution_x, s.render.resolution_y = int(w), int(h)
     s.render.resolution_percentage = 100
-s.render.image_settings.file_format = 'PNG'
-print('RENDER', s.render.engine, s.render.resolution_x, s.render.resolution_y, s.frame_start, s.frame_end, s.render.fps)
-"
+s.render.image_settings.file_format = "PNG"
+print("RENDER", s.render.engine, s.render.resolution_x, s.render.resolution_y, s.frame_start, s.frame_end, s.render.fps)
+'
 
 start=$(date +%s)
 if ((anim)); then
-  blender -b "$blend" --python-expr "$py" -o "$(readlink -f "$out")/${name}_####" -a 2>&1 | grep -E '^RENDER|Saved|Error' | tail -3
+  blender -b "$blend" --python-expr "$py" -o "$(readlink -f "$out")/${name}_####" -a 2>&1 | { grep -E '^RENDER|Saved|Error' || true; } | tail -3
   fps=$(blender -b "$blend" --python-expr 'import bpy; print("FPS", bpy.context.scene.render.fps)' 2>/dev/null | awk '/^FPS/{print $2}')
   sw=(-c:v libx264 -crf 18 -preset slow -pix_fmt yuv420p)
   enc=("${sw[@]}")
@@ -57,6 +62,6 @@ if ((anim)); then
   encode "${enc[@]}" 2>/dev/null || encode "${sw[@]}"
   echo "✔ $out/$name.mp4"
 else
-  blender -b "$blend" --python-expr "$py" -o "$(readlink -f "$out")/${name}_####" -f "${frame:-1}" 2>&1 | grep -E '^RENDER|Saved|Error' | tail -3
+  blender -b "$blend" --python-expr "$py" -o "$(readlink -f "$out")/${name}_####" -f "${frame:-1}" 2>&1 | { grep -E '^RENDER|Saved|Error' || true; } | tail -3
 fi
 echo "done in $(( $(date +%s) - start ))s"
