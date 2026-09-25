@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.1.1](https://github.com/codeonym-oss/design-skills/compare/v0.1.0...v0.1.1) (2026-09-25)
+
+
+### Build & Image
+
+* **deps:** Bump actions/checkout from 5 to 7 ([#3](https://github.com/codeonym-oss/design-skills/issues/3)) ([c56c70f](https://github.com/codeonym-oss/design-skills/commit/c56c70f3e394d16cf7f161da546b3b6fb4606e38))
+* **deps:** Bump actions/download-artifact from 4 to 8 ([bdbfc0e](https://github.com/codeonym-oss/design-skills/commit/bdbfc0e46c0b0895088e2c00e8ce6a05b199e1a3))
+* **deps:** Bump actions/upload-artifact from 4 to 7 ([#4](https://github.com/codeonym-oss/design-skills/issues/4)) ([ae1eda7](https://github.com/codeonym-oss/design-skills/commit/ae1eda7ee76113e5d5fcf10402d6923cccbf322f))
+* **deps:** Bump docker/build-push-action from 6 to 7 ([#1](https://github.com/codeonym-oss/design-skills/issues/1)) ([a433ab2](https://github.com/codeonym-oss/design-skills/commit/a433ab2b293dd74050d0fbeb82b5e07d1aeb7a8f))
+* **deps:** Bump docker/login-action from 3 to 4 ([#2](https://github.com/codeonym-oss/design-skills/issues/2)) ([78d81b7](https://github.com/codeonym-oss/design-skills/commit/78d81b7c8fe4a20a78b6a126b38154eda6bb4fba))
+
 ## 0.1.0 — 2026-09-25
 
 First public release, copied from the author's personal Arch workstation skills and made distro-agnostic and container-first.
