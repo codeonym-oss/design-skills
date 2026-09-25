@@ -1,0 +1,17 @@
+{
+  "name": "codeonym-oss",
+  "owner": {
+    "name": "codeonym-oss",
+    "url": "https://github.com/codeonym-oss"
+  },
+  "description": "Open-source Claude Code plugins from codeonym-oss.",
+  "plugins": [
+    {
+      "name": "codeonym-oss",
+      "source": "./",
+      "description": "Design skills with a reproducible headless toolchain (Blender, GIMP, Inkscape, Krita, Scribus, darktable, ffmpeg, ImageMagick) in versioned containers.",
+      "category": "design",
+      "keywords": ["design", "docker", "blender", "gimp", "inkscape", "ffmpeg"]
+    }
+  ]
+}

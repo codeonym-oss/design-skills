@@ -1,0 +1,44 @@
+# Install names for every command the skills check, per package manager.
+# Columns: command	apt	pacman	dnf	brew     ("-" = not packaged; "cask:x" = brew cask; "x@aur" = AUR)
+# dnf names for ffmpeg need RPM Fusion. Used by lib/check.sh → summary().
+inkscape	inkscape	inkscape	inkscape	cask:inkscape
+magick	imagemagick	imagemagick	ImageMagick	imagemagick
+rsvg-convert	librsvg2-bin	librsvg	librsvg2-tools	librsvg
+resvg	resvg	resvg	resvg	resvg
+scour	scour	scour	scour	-
+potrace	potrace	potrace	potrace	potrace
+cwebp	webp	libwebp	libwebp-tools	webp
+avifenc	libavif-bin	libavif	libavif-tools	libavif
+cjxl	libjxl-tools	libjxl	libjxl-utils	jpeg-xl
+pngquant	pngquant	pngquant	pngquant	pngquant
+oxipng	-	oxipng	oxipng	oxipng
+optipng	optipng	optipng	optipng	optipng
+jpegoptim	jpegoptim	jpegoptim	jpegoptim	jpegoptim
+gimp	gimp	gimp	gimp	cask:gimp
+gmic	gmic	gmic	gmic	gmic
+krita	krita	krita	krita	cask:krita
+blender	blender	blender	blender	cask:blender
+scribus	scribus	scribus	scribus	cask:scribus
+darktable	darktable	darktable	darktable	cask:darktable
+darktable-cli	darktable	darktable	darktable	cask:darktable
+melt	melt	mlt	mlt	mlt
+gs	ghostscript	ghostscript	ghostscript	ghostscript
+pdfinfo	poppler-utils	poppler	poppler-utils	poppler
+pdffonts	poppler-utils	poppler	poppler-utils	poppler
+pdfimages	poppler-utils	poppler	poppler-utils	poppler
+pdftoppm	poppler-utils	poppler	poppler-utils	poppler
+ffmpeg	ffmpeg	ffmpeg	ffmpeg	ffmpeg
+ffprobe	ffmpeg	ffmpeg	ffmpeg	ffmpeg
+exiftool	libimage-exiftool-perl	perl-image-exiftool	perl-Image-ExifTool	exiftool
+fontforge	fontforge	fontforge	fontforge	fontforge
+woff2_compress	woff2	woff2	woff2	woff2
+fc-list	fontconfig	fontconfig	fontconfig	fontconfig
+fc-match	fontconfig	fontconfig	fontconfig	fontconfig
+python3	python3	python	python3	python
+xvfb-run	xvfb	xorg-server-xvfb	xorg-x11-server-Xvfb	-
+vainfo	vainfo	libva-utils	libva-utils	-
+curl	curl	curl	curl	curl
+bats	bats	bash-bats	bats	bats-core
+obs	obs-studio	obs-studio	obs-studio	cask:obs
+showmethekey-gtk	-	showmethekey	-	-
+gsettings	libglib2.0-bin	glib2	glib2	-

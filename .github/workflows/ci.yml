@@ -1,0 +1,23 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  lint-and-unit:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install bats
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq bats
+      - name: Lint (shellcheck)
+        run: make lint
+      - name: Unit tests (dispatcher, CLI, check library, repo consistency)
+        run: make test-unit BATS=bats
+      - name: Unit tests under bash 3.2 (macOS host compatibility)
+        run: make test-bash32

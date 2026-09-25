@@ -1,0 +1,6 @@
+# outputs the scripts create next to your files
+export/
+renders/
+web/
+*.blend1
+node_modules/

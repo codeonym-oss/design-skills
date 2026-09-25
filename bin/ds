@@ -1,0 +1,71 @@
+#!/usr/bin/env bash
+# ds — run the design-skills toolchain (in its container, or natively inside it).
+set -euo pipefail
+self=$0  # follow symlinks (e.g. /usr/local/bin/ds) portably — macOS readlink has no -f
+while [[ -L $self ]]; do l=$(readlink "$self"); [[ $l == /* ]] && self=$l || self=$(dirname "$self")/$l; done
+. "$(cd "$(dirname "$self")/.." && pwd -P)/lib/ds.sh"
+
+usage() {
+  cat >&2 <<'EOF'
+usage: ds <skill>/<script> [args...]   run a skill script      e.g. ds graphic-design/optimize logo.png
+       ds exec <tool> [args...]         run any tool            e.g. ds exec inkscape --version
+       ds shell [core|full]             interactive shell in the image, current dir mounted
+       ds doctor [--verbose]            health check of the whole toolchain
+       ds list                          list the skill scripts
+       ds pull [core|full]              download the image (core ≈ 1.3 GB, full ≈ 4 GB)
+       ds image [core|full]             print the image reference
+       ds test [unit|integration]       run the test suite inside the image
+       ds version                       plugin version, runtime and image
+
+environment: DS_RUNTIME=auto|docker|podman|native  DS_VARIANT=core|full  DS_IMAGE=<ref>
+             DS_IMAGE_REPO  DS_IMAGE_TAG  DS_MOUNTS="<dirs>"  DS_FONTS="<dirs>"  DS_GPU=0
+             DS_ENV="<vars to forward>"  DS_RUN_ARGS="<extra docker/podman run flags>"
+EOF
+  exit 2
+}
+
+run_tool() { # run_tool <interactive> <needs-full> <cmd...>
+  local interactive=$1 needs=$2 rt; shift 2
+  rt=$(ds_runtime)
+  if [[ $rt == native ]]; then exec "$@"; fi
+  ds_container_exec "$rt" "$(ds_image "$(ds_pick_variant "$rt" "$needs")")" "$interactive" "$@"
+}
+
+(($#)) || usage
+cmd=$1; shift
+case $cmd in
+  -h|--help|help) usage ;;
+  list)
+    for s in "$DS_ROOT"/skills/*/scripts/*; do
+      n=${s#"$DS_ROOT"/skills/}; n=${n/\/scripts\//\/}
+      case $n in */check.sh|*.py) continue ;; esac
+      printf '%-38s %s\n' "${n%.sh}" "$(grep -E '^# ' "$s" | grep -vm1 '^# ds-' | sed 's/^# //')"
+    done ;;
+  exec)
+    (($#)) || usage
+    run_tool 0 "$(ds_tool_needs_full "$1")" "$@" ;;
+  shell)
+    [[ -n ${1:-} ]] && export DS_VARIANT=$1
+    run_tool 1 0 bash ;;
+  doctor) exec bash "$DS_ROOT/skills/design-doctor/scripts/doctor.sh" "$@" ;;
+  pull)
+    rt=$(ds_runtime); [[ $rt == native ]] && ds_die "no container runtime (install Docker or Podman)"
+    exec "$rt" pull "$(ds_image "${1:-core}")" ;;
+  image) ds_image "${1:-core}" ;;
+  test)
+    suites=${1:-unit integration}
+    dirs=(); for s in $suites; do dirs+=("$DS_ROOT/tests/$s"); done
+    run_tool 0 "$( [[ $suites == *integration* ]] && echo 1 || echo 0)" bats "${dirs[@]}" ;;
+  version)
+    rt=$(ds_runtime)
+    echo "design-skills $(ds_version) · runtime $rt$( [[ $rt != native ]] && echo " · image $(ds_image "$(ds_pick_variant "$rt" 0)")")" ;;
+  */*)
+    script="$DS_ROOT/skills/${cmd%%/*}/scripts/${cmd#*/}"
+    [[ -f $script ]] || script="$script.sh"
+    [[ -f $script ]] || { echo "ds: no script '$cmd' — see: ds list" >&2; exit 2; }
+    case $script in
+      *.py) run_tool 0 1 blender -b --factory-startup -P "$script" -- "$@" ;;
+      *) exec bash "$script" "$@" ;;
+    esac ;;
+  *) echo "ds: unknown command '$cmd'" >&2; usage ;;
+esac
