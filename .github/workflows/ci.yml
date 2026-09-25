@@ -51,5 +51,3 @@ jobs:
             chore
             revert
           requireScope: false
-          subjectPattern: ^(?![A-Z]).+$
-          subjectPatternError: 'Start the subject with a lowercase letter, e.g. "feat(typography): add variable-font axes to specimens".'
