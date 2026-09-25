@@ -4,9 +4,14 @@ on:
   push:
     branches: [main]
   pull_request:
+    types: [opened, edited, synchronize, reopened]
 
 permissions:
   contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   lint-and-unit:
@@ -21,3 +26,30 @@ jobs:
         run: make test-unit BATS=bats
       - name: Unit tests under bash 3.2 (macOS host compatibility)
         run: make test-bash32
+
+  # Squash merges use the PR title as the commit message, and release-please builds versions and
+  # the changelog from those commits — so PR titles must be conventional commits.
+  pr-title:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-24.04
+    permissions:
+      pull-requests: read
+    steps:
+      - uses: amannn/action-semantic-pull-request@v6
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          types: |
+            feat
+            fix
+            perf
+            build
+            docs
+            refactor
+            test
+            ci
+            chore
+            revert
+          requireScope: false
+          subjectPattern: ^(?![A-Z]).+$
+          subjectPatternError: 'Start the subject with a lowercase letter, e.g. "feat(typography): add variable-font axes to specimens".'

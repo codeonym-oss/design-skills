@@ -1,0 +1,5 @@
+# Default reviewers for everything.
+*                   @codeonym
+# Release and supply-chain configuration.
+/.github/           @codeonym
+/docker/            @codeonym

@@ -53,8 +53,23 @@ compatible (no `${x,,}`, `declare -A`, `mapfile`; expand possibly-empty arrays a
 GNU-only flags (`readlink -f` is fine: macOS 12.3+). `make test-bash32` checks the bash syntax on BusyBox tools.
 Forwarded environment variables a script reads must be listed in `DS_PASS_ENV` (`lib/ds.sh`).
 
+## Workflow
+
+Issues are tracked in Linear (team `COD`, project *design-skills*) — see `docs/agents/issue-tracker.md`;
+GitHub issues from users are triaged into it.
+
+1. Branch from `main` (Linear's *Copy git branch name* gives `…/cod-<n>-…`).
+2. Open a PR. Its **title must be a conventional commit** — `feat(skill): …`, `fix(ds): …`, `build(image): …`,
+   `docs: …`, `ci: …` — because it becomes the squash commit and the changelog line. Breaking change: `feat!:`.
+3. Required checks: lint + unit tests, integration tests in core/full images on amd64 and arm64, PR title.
+   `main` accepts squash merges from PRs only; history is linear.
+
 ## Releasing
 
-1. Bump `VERSION` and `version` in `.claude-plugin/plugin.json` (a unit test keeps them equal); add a `CHANGELOG.md` entry.
-2. Merge to `main` (publishes `:edge-*`), then tag `vX.Y.Z` — CI builds amd64 + arm64, runs the integration suite
-   in each image, pushes `:X.Y.Z-core/-full` + moving tags, and creates the GitHub release.
+Automatic. [release-please](https://github.com/googleapis/release-please) keeps a *chore(main): release X.Y.Z*
+PR open that bumps `VERSION`, `.claude-plugin/plugin.json` and `CHANGELOG.md` from the commits since the last
+tag (`feat` → minor, `fix` → patch while < 1.0). Merging it tags `vX.Y.Z`, creates the GitHub release, and
+builds, tests and publishes `:X.Y.Z-core/-full` (+ `:X.Y-*`, `:core`, `:full`, `:latest`) with SBOM and
+provenance. Every push to `main` also publishes `:edge-core/-full`.
+
+Release tags are protected: they can't be moved or deleted — a released image never changes.

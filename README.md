@@ -1,5 +1,10 @@
 # design-skills
 
+[![ci](https://github.com/codeonym-oss/design-skills/actions/workflows/ci.yml/badge.svg)](https://github.com/codeonym-oss/design-skills/actions/workflows/ci.yml)
+[![image](https://github.com/codeonym-oss/design-skills/actions/workflows/image.yml/badge.svg)](https://github.com/codeonym-oss/design-skills/actions/workflows/image.yml)
+[![release](https://img.shields.io/github/v/release/codeonym-oss/design-skills)](https://github.com/codeonym-oss/design-skills/releases)
+[![license](https://img.shields.io/github/license/codeonym-oss/design-skills)](LICENSE)
+
 Design skills for [Claude Code](https://claude.com/claude-code), with the whole toolchain in a **versioned, headless
 container**: Blender, GIMP, Inkscape, Krita, Scribus, darktable, MLT, ffmpeg, ImageMagick, Ghostscript, FontForge,
 the web-image optimizers and a curated font library. Install the plugin, have Docker or Podman, and every skill
@@ -74,6 +79,8 @@ editor (projects are rendered headlessly with melt), and tablet drivers.
 | `:0.1-core`, `:core`, `:0.1-full`, `:full`, `:latest` | moving tags |
 | `:edge-core`, `:edge-full` | latest `main` |
 
+Every published image carries an SBOM and SLSA provenance (`docker buildx imagetools inspect <ref> --format '{{json .SBOM}}'`).
+
 Built on Ubuntu 26.04 LTS (base pinned by digest), for `linux/amd64` and `linux/arm64`. Publishing from a fork?
 GHCR creates new packages as private — set the package to *Public* once (package settings) so `docker pull` works anonymously.
 
@@ -105,7 +112,9 @@ tests/unit        bats: dispatcher, CLI, check library, repo consistency (fake c
 tests/integration bats: every script against generated fixtures, inside the image (tag `full` = full image only)
 ```
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for adding tools and skills, and [CHANGELOG.md](CHANGELOG.md).
+See [CONTRIBUTING.md](CONTRIBUTING.md) for adding tools and skills and the release flow, [CHANGELOG.md](CHANGELOG.md),
+and [SECURITY.md](SECURITY.md) to report vulnerabilities. The maintainers track the roadmap in
+Linear; bug reports and feature requests are welcome as GitHub issues.
 
 ## Origins
 
