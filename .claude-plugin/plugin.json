@@ -1,6 +1,6 @@
 {
   "name": "codeonym-oss",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Design skills for Claude Code with a reproducible, headless toolchain: graphic design, illustration, photo editing, UI design, typography, print layout, 3D with Blender, video editing and screen recording. Every script runs in a versioned container (Blender, GIMP, Inkscape, Krita, Scribus, darktable, ffmpeg, ImageMagick, fonts…) so it works the same on Linux, macOS and Windows (WSL2).",
   "author": {
     "name": "codeonym",
@@ -9,7 +9,21 @@
   "homepage": "https://github.com/codeonym-oss/design-skills",
   "repository": "https://github.com/codeonym-oss/design-skills",
   "license": "MIT",
-  "keywords": ["design", "docker", "blender", "gimp", "inkscape", "krita", "scribus", "darktable", "ffmpeg", "imagemagick", "fonts", "print", "video"],
+  "keywords": [
+    "design",
+    "docker",
+    "blender",
+    "gimp",
+    "inkscape",
+    "krita",
+    "scribus",
+    "darktable",
+    "ffmpeg",
+    "imagemagick",
+    "fonts",
+    "print",
+    "video"
+  ],
   "skills": [
     "./skills/design-sandbox",
     "./skills/design-doctor",
