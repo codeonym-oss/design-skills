@@ -3,7 +3,7 @@
 
 ## What and why
 
-Fixes COD-<!-- Linear issue number -->
+Fixes #<!-- issue number -->
 
 ## How it was tested
 

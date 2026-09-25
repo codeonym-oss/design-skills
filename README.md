@@ -113,8 +113,9 @@ tests/integration bats: every script against generated fixtures, inside the imag
 ```
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for adding tools and skills and the release flow, [CHANGELOG.md](CHANGELOG.md),
-and [SECURITY.md](SECURITY.md) to report vulnerabilities. The maintainers track the roadmap in
-Linear; bug reports and feature requests are welcome as GitHub issues.
+and [SECURITY.md](SECURITY.md) to report vulnerabilities. The roadmap lives in the
+[issues and milestones](https://github.com/codeonym-oss/design-skills/milestones); bug reports and feature
+requests are welcome as [GitHub issues](https://github.com/codeonym-oss/design-skills/issues/new/choose).
 
 ## Origins
 

@@ -1,6 +1,6 @@
 name: Bug report
 description: A skill script, the ds CLI or an image misbehaves.
-labels: [bug]
+type: Bug
 body:
   - type: input
     id: what
