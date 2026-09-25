@@ -1,7 +1,7 @@
 # Issue tracker (for agents and contributors)
 
-Work is tracked in **GitHub Issues** on this repo; the
-[codeonym-oss board](https://github.com/orgs/codeonym-oss/projects) shows it across the organization's repos.
+Work is tracked in **GitHub Issues** on this repo and on its own
+[design-skills board](https://github.com/orgs/codeonym-oss/projects/1) (one board per repo).
 
 - **Milestones** map to releases (`v0.1.1 — Pro distribution`, `v0.2.0 — More headless skills`, …).
 - **Issue type**: `Feature`, `Improvement`, `Bug` or `Task` (set on the issue, not as a label).
