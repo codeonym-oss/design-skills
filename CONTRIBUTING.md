@@ -55,10 +55,9 @@ Forwarded environment variables a script reads must be listed in `DS_PASS_ENV` (
 
 ## Workflow
 
-Issues are tracked in Linear (team `COD`, project *design-skills*) — see `docs/agents/issue-tracker.md`;
-GitHub issues from users are triaged into it.
+Issues are tracked in GitHub Issues (milestone per release, `area:` labels) — see `docs/agents/issue-tracker.md`.
 
-1. Branch from `main` (Linear's *Copy git branch name* gives `…/cod-<n>-…`).
+1. Branch from `main`, named after the issue (`<n>-short-name`); the PR body says `Fixes #<n>`.
 2. Open a PR. Its **title must be a conventional commit** — `feat(skill): …`, `fix(ds): …`, `build(image): …`,
    `docs: …`, `ci: …` — because it becomes the squash commit and the changelog line. Breaking change: `feat!:`.
 3. Required checks: lint + unit tests, integration tests in core/full images on amd64 and arm64, PR title.

@@ -1,6 +1,6 @@
 name: Feature or skill request
 description: A new skill, script, tool in the image, or an improvement.
-labels: [enhancement]
+type: Feature
 body:
   - type: textarea
     id: job
