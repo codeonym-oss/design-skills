@@ -10,40 +10,83 @@ container**: Blender, GIMP, Inkscape, Krita, Scribus, darktable, MLT, ffmpeg, Im
 the web-image optimizers and a curated font library. Install the plugin, have Docker or Podman, and every skill
 works the same on Linux, macOS (Intel and Apple Silicon) and Windows (WSL2) — no per-machine setup.
 
-Skills are installed under the `codeonym-oss:` prefix.
+Claude Code installs skills under the `design-skills:` prefix. The plugin is named `design-skills`;
+`codeonym-oss` is the publisher and marketplace.
 
 | Skill | Covers | Image |
 |---|---|---|
-| `codeonym-oss:design-sandbox` | The environment itself: `ds` CLI, images, mounts, fonts, GPU, troubleshooting | — |
-| `codeonym-oss:design-doctor` | Health check of everything; which skill/tool for which job | — |
-| `codeonym-oss:graphic-design` | Logos, banners, social sizes, SVG export, vectorizing, web-image optimization | core |
-| `codeonym-oss:illustration` | Krita canvases from presets, headless `.kra` export, tablet setup | full |
-| `codeonym-oss:photo-editing` | darktable batch development, web-ready photos, metadata/GPS stripping, contact sheets | core · full |
-| `codeonym-oss:ui-design` | Favicons/PWA icon sets + manifest, OKLCH color scales → CSS/Tailwind v4, design tokens | core |
-| `codeonym-oss:typography` | Font inventory, specimens (any script), project fonts, WOFF2 + `@font-face` | core |
-| `codeonym-oss:print-layout` | Scribus templates with bleed/CMYK, PDF preflight, proofs, compression, CMYK conversion | core · full |
-| `codeonym-oss:3d-modeling` | Blender renders, design mockups, turntables, GLB (+Draco) conversion, STL | full |
-| `codeonym-oss:video-editing` | Platform encodes, loudness normalization, GIF/WebM, thumbnails, headless Kdenlive/MLT renders | core · full |
-| `codeonym-oss:screen-recording` | OBS setup on any OS, recording workflow, post-production of recordings | host · core |
+| `design-skills:design-sandbox` | The environment itself: `ds` CLI, images, mounts, fonts, GPU, troubleshooting | — |
+| `design-skills:design-doctor` | Health check of everything; which skill/tool for which job | — |
+| `design-skills:graphic-design` | Logos, banners, social sizes, SVG export, vectorizing, web-image optimization | core |
+| `design-skills:illustration` | Krita canvases from presets, headless `.kra` export, tablet setup | full |
+| `design-skills:photo-editing` | darktable batch development, web-ready photos, metadata/GPS stripping, contact sheets | core · full |
+| `design-skills:ui-design` | Favicons/PWA icon sets + manifest, OKLCH color scales → CSS/Tailwind v4, design tokens | core |
+| `design-skills:typography` | Font inventory, specimens (any script), project fonts, WOFF2 + `@font-face` | core |
+| `design-skills:print-layout` | Scribus templates with bleed/CMYK, PDF preflight, proofs, compression, CMYK conversion | core · full |
+| `design-skills:3d-modeling` | Blender renders, design mockups, turntables, GLB (+Draco) conversion, STL | full |
+| `design-skills:video-editing` | Platform encodes, loudness normalization, GIF/WebM, thumbnails, headless Kdenlive/MLT renders | core · full |
+| `design-skills:screen-recording` | OBS setup on any OS, recording workflow, post-production of recordings | host · core |
 
 ## Install
 
+### Claude Code
+
 ```bash
 claude plugin marketplace add codeonym-oss/claude-plugins
-claude plugin install codeonym-oss@codeonym-oss
+claude plugin install design-skills@codeonym-oss
 ```
 
 The `codeonym-oss` marketplace now lives in [codeonym-oss/claude-plugins](https://github.com/codeonym-oss/claude-plugins),
 beside the org's other plugins. If you added it from this repo before, switch once:
 `claude plugin marketplace remove codeonym-oss`, then the two commands above.
 
-Then pull an image once (or let the first script pull it). `ds` ships inside the plugin; put it on your PATH:
+### Codex
 
 ```bash
-ln -s ~/.claude/plugins/cache/codeonym-oss/codeonym-oss/*/bin/ds ~/.local/bin/ds
+codex plugin marketplace add codeonym-oss/claude-plugins
+codex plugin add design-skills@codeonym-oss
+```
+
+Start a new Codex session and use `/skills` to find the installed skills. Ask Codex to use the `design-doctor`
+skill to check your setup. Packaging and installation have been checked in Codex; the full skill workflows have
+not yet been tested there.
+
+### Migrating from the old plugin name
+
+The plugin used to be named `codeonym-oss`. Refresh the marketplace, remove the old plugin if it is installed,
+and install `design-skills`:
+
+```bash
+# Claude Code
+claude plugin marketplace update codeonym-oss
+claude plugin uninstall codeonym-oss@codeonym-oss
+claude plugin install design-skills@codeonym-oss
+```
+
+```bash
+# Codex
+codex plugin marketplace upgrade codeonym-oss
+codex plugin remove codeonym-oss@codeonym-oss
+codex plugin add design-skills@codeonym-oss
+```
+
+The marketplace name stays `codeonym-oss`; Claude skill commands now use `design-skills:<skill>`. If `ds` was
+linked to the old plugin cache, recreate that link to the new installation using `ln -sfn` and its version's path.
+
+### Design toolchain
+
+Pull an image once (or let the first script pull it). `ds` ships inside the plugin; put it on your PATH.
+For Claude Code:
+
+```bash
+ln -s ~/.claude/plugins/cache/codeonym-oss/design-skills/*/bin/ds ~/.local/bin/ds
 ds pull core     # ≈1.2 GB: graphic, photo, UI, type, print PDFs, video
 ds pull full     # ≈2.9 GB: adds Blender, GIMP, Krita, Scribus, darktable, melt
 ```
+
+For Codex, use the installed version's path under `~/.codex/plugins/cache/codeonym-oss/design-skills/` instead,
+for example `~/.codex/plugins/cache/codeonym-oss/design-skills/0.1.1/bin/ds`. Plugin installation does not pull the
+design images automatically.
 
 Or just ask Claude: *"check my design setup"* runs the doctor.
 

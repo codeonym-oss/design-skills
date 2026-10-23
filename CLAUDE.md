@@ -1,6 +1,6 @@
 # design-skills — notes for Claude
 
-- Public plugin `codeonym-oss` (skills are `codeonym-oss:<skill>`). Read `CONTRIBUTING.md` for how scripts,
+- Public plugin `design-skills` (skills are `design-skills:<skill>`). Read `CONTRIBUTING.md` for how scripts,
   tools and skills are added; `README.md` for how the container dispatch works.
 - Issues live in GitHub Issues on this repo (milestones = releases) — see `docs/agents/issue-tracker.md`.
 - `main` is protected: work on a branch named after the issue (`<n>-short-name`), open a PR with a conventional-commit
