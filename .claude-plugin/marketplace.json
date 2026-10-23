@@ -7,7 +7,7 @@
   "description": "Open-source Claude Code plugins from codeonym-oss.",
   "plugins": [
     {
-      "name": "codeonym-oss",
+      "name": "design-skills",
       "source": "./",
       "description": "Design skills with a reproducible headless toolchain (Blender, GIMP, Inkscape, Krita, Scribus, darktable, ffmpeg, ImageMagick) in versioned containers.",
       "category": "design",
