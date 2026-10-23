@@ -29,9 +29,13 @@ Skills are installed under the `codeonym-oss:` prefix.
 ## Install
 
 ```bash
-claude plugin marketplace add codeonym-oss/design-skills
+claude plugin marketplace add codeonym-oss/claude-plugins
 claude plugin install codeonym-oss@codeonym-oss
 ```
+
+The `codeonym-oss` marketplace now lives in [codeonym-oss/claude-plugins](https://github.com/codeonym-oss/claude-plugins),
+beside the org's other plugins. If you added it from this repo before, switch once:
+`claude plugin marketplace remove codeonym-oss`, then the two commands above.
 
 Then pull an image once (or let the first script pull it). `ds` ships inside the plugin; put it on your PATH:
 
